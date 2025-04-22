@@ -1,8 +1,9 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import {SequelizeDataSource} from '@loopback/sequelize'
+
 
 const config = {
-  name: 'user',
+  name: 'user', // This name is used to bind the datasource to the application
   connector: 'postgresql',
   url: '',
   host: 'localhost',
@@ -17,7 +18,7 @@ const config = {
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
 @lifeCycleObserver('datasource')
-export class UserDataSource extends juggler.DataSource
+export class UserDataSource extends SequelizeDataSource
   implements LifeCycleObserver {
   static dataSourceName = 'user';
   static readonly defaultConfig = config;
